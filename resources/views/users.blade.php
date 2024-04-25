@@ -3,7 +3,7 @@
 <head>
     <title>Список пользователей</title>
 </head>
-<table>
+<table border="2">
     @foreach($users as $user)
         <tr>
             <td>
