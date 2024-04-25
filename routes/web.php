@@ -10,4 +10,4 @@ Route::get('/', function () {
 
 Route::get('/test', TestController::class)->name('test');
 
-Route::get('/users', [UserController::class, 'show'])->name('users');
+Route::get('/users', UserController::class)->name('users');
