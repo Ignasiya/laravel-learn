@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\FormProcessor;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\LibraryUserController;
 use App\Http\Controllers\MyUserController;
@@ -46,6 +47,12 @@ Route::get('/my_user', [MyUserController::class, 'show'])->name('user.my_user');
 Route::get('/redirect_test', TestRedirectController::class);
 
 Route::get('/send_file', SendFileController::class);
+
+// Форма домашняя работа №2
+Route::prefix('/homework_user')->controller(FormProcessor::class)->group(function () {
+    Route::get('/', 'index')->name('form_processor.show');
+    Route::post('/', 'store')->name('form_processor.create');
+});
 
 
 // Группировка по префиксу и контроллеру
