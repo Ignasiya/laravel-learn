@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
-        $users = DB::connection('mysql')
-            ->table('users')
-            ->select(['name', 'email'])
-            ->get();
+        return view('form');
+    }
+    public function store(Request $request)
+    {
+        $userData = ['username' => $request->username, 'email' => $request->email];
 
-       return view('users', ['users' => $users]);
+        return response()->json($userData);
     }
 }
