@@ -6,6 +6,7 @@ use App\Http\Controllers\FormProcessor;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\LibraryUserController;
 use App\Http\Controllers\MyUserController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SendFileController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\TestController;
@@ -53,6 +54,8 @@ Route::prefix('/homework_user')->controller(FormProcessor::class)->group(functio
     Route::get('/', 'index')->name('form_processor.show');
     Route::post('/', 'store')->name('form_processor.create');
 });
+
+Route::resource('/post', PostController::class);
 
 
 // Группировка по префиксу и контроллеру
