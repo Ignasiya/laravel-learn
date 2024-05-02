@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\FormProcessor;
@@ -53,6 +54,11 @@ Route::get('/send_file', SendFileController::class);
 Route::prefix('/homework_user')->controller(FormProcessor::class)->group(function () {
     Route::get('/', 'index')->name('form_processor.show');
     Route::post('/', 'store')->name('form_processor.create');
+});
+
+// Форма домашняя работа №3
+Route::prefix('/test_database')->controller(EmployeeController::class)->group(function () {
+    Route::get('/', 'store')->name('employee.show');
 });
 
 Route::resource('/post', PostController::class);
