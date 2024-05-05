@@ -63,6 +63,24 @@ Route::prefix('/test_database')->controller(EmployeeController::class)->group(fu
 
 Route::resource('/post', PostController::class);
 
+Route::get('/main', function () {
+   return view('mainpage');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/users_list', function () {
+    $users = ['Ivan', 'Petr', 'Nikolay', 'Vasiliy', 'Oleg'];
+
+    return view('users', ['users' => $users]);
+});
+
+Route::get('/uppercase', function () {
+    return view('testdirectiv');
+});
+
 
 // Группировка по префиксу и контроллеру
 Route::prefix('/post')->controller(PostController::class)->group(function() {
