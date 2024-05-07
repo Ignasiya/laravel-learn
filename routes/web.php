@@ -81,6 +81,26 @@ Route::get('/uppercase', function () {
     return view('testdirectiv');
 });
 
+// Blade домашняя работа №3
+Route::get('/home', function () {
+    return view('home', [
+        'name' => 'Иван',
+        'age' => 24,
+        'position' => 'developer',
+        'address' => 'Москва',
+    ]);
+});
+
+Route::get('/contacts', function () {
+    return view('contacts', [
+        'address' => 'Москва',
+        'post_code' => '101000',
+        'email' => 'ivandev@example.com',
+        'phone' => '+79990009999',
+    ]);
+});
+
+
 
 // Группировка по префиксу и контроллеру
 Route::prefix('/post')->controller(PostController::class)->group(function() {
