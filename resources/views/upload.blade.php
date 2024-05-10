@@ -8,12 +8,13 @@
     <title>Upload</title>
 </head>
 <body>
-<form name="add-new-book" id="add-new-book" method="post" enctype="multipart/form-data" action="{{route('file.upload')}}">
+<form name="file-upload" method="post" enctype="multipart/form-data" action="{{route('file.upload')}}">
     @csrf
     <div>
         <label for="file_name">Name</label>
         <input type="text" id="file_name" name="file_name" required/>
-        <input type="file" name="file_uploaded"/>
+        <input type="file" name="file_uploaded[]"/>
+        <input type="file" name="file_uploaded[]"/>
     </div>
     <button type="submit">Submit</button>
 </form>

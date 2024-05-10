@@ -19,11 +19,21 @@ class FileUploadController extends Controller
             return response('Too many uploads');
         }
 
-        $name = $request->input('file_name');
-        $file = $request->file('file_uploaded');
+        if($request->hasFile('file_uploaded')) {
+            return response('No file uploaded');
+        }
 
-        // $tempPath = $file->getRealPath();
+        $name = $request->input('file_name');
+
+        $file = $request->file('file_uploaded');
+        echo  $file->path() . PHP_EOL;
+        $file->storeAs('images', $file->getClientOriginalExtension());
+
+        $tempPath = $file->getRealPath();
+        echo $tempPath . PHP_EOL;
+
         $newFileName = $name . '.' . $file->getClientOriginalExtension();
+        echo $newFileName . PHP_EOL;
 
         // move_uploaded_file($tempPath, 'uploads/' . $newFileName);
         $file->move('uploads', $newFileName);

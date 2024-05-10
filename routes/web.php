@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\CookieTestController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\FormProcessor;
+use App\Http\Controllers\HeaderTestController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\JsonParseController;
 use App\Http\Controllers\LibraryUserController;
 use App\Http\Controllers\MyUserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RequestTestController;
 use App\Http\Controllers\SendFileController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\TestController;
@@ -100,6 +104,14 @@ Route::get('/contacts', function () {
     ]);
 });
 
+// Урок 5 Реквесты
+Route::post('/test_request', [RequestTestController::class, 'testRequest'])->name('test.request');
+
+Route::get('/test_header', [HeaderTestController::class, 'getHeader'])->name('test.header');
+
+Route::get('/test_cookie', [CookieTestController::class, 'testCookie'])->name('test.cookie');
+
+Route::post('/json_parse', [JsonParseController::class, 'parseJson'])->name('test.parseJson');;
 
 
 // Группировка по префиксу и контроллеру
