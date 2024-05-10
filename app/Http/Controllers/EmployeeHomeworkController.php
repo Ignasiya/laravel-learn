@@ -18,8 +18,7 @@ class EmployeeHomeworkController extends Controller
     {
         $userData = $request->validated();
 
-        $json =  $userData['workData'];
-        echo $json;
+        print_r(json_decode($userData['workData']));
 
         $employee = Employee::create($userData);
 
