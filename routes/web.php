@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CookieTestController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeHomeworkController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\FormProcessor;
@@ -85,7 +86,7 @@ Route::get('/uppercase', function () {
     return view('testdirectiv');
 });
 
-// Blade домашняя работа №3
+// Blade домашняя работа №4
 Route::get('/home', function () {
     return view('home', [
         'name' => 'Иван',
@@ -112,6 +113,13 @@ Route::get('/test_header', [HeaderTestController::class, 'getHeader'])->name('te
 Route::get('/test_cookie', [CookieTestController::class, 'testCookie'])->name('test.cookie');
 
 Route::post('/json_parse', [JsonParseController::class, 'parseJson'])->name('test.parseJson');;
+
+// Request домашняя работа №5
+Route::prefix('/employee')->controller(EmployeeHomeworkController::class)->group(function () {
+    Route::get('/', 'index')->name('employee.show');
+    Route::post('/', 'store')->name('employee.create');
+    Route::put('/{id}', 'update')->name('employee.update');
+});
 
 
 // Группировка по префиксу и контроллеру
