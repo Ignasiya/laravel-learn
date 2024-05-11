@@ -5,6 +5,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeHomeworkController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\FormBuilderTestController;
 use App\Http\Controllers\FormProcessor;
 use App\Http\Controllers\FormTestController;
 use App\Http\Controllers\HeaderTestController;
@@ -144,6 +145,11 @@ Route::prefix('/security')->controller(TestSecurityController::class)->group(fun
 Route::prefix('/validation')->controller(TestValidationController::class)->group(function () {
     Route::get('/', 'index')->name('validation.show');
     Route::post('/', 'post')->name('validation.post');
+});
+
+Route::prefix('/builder')->controller(FormBuilderTestController::class)->group(function () {
+    Route::get('/', 'show')->name('build.show');
+    Route::post('/', 'post')->name('build.post');
 });
 
 

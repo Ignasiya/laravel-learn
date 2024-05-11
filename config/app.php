@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
@@ -86,6 +87,10 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
+    'aliases' => Facade::defaultAliases()->merge([
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
+    ])->toArray(),
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -146,5 +151,6 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\BladeHelperServiceProvider::class,
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class
     ])->toArray(),
 ];
