@@ -25,7 +25,7 @@ class EmployeeHomeworkController extends Controller
         return response()->json($employee, 201);
     }
 
-    public function update(EmployeeRequest $request, $id): JsonResponse
+    public function update(EmployeeRequest $request, int $id): JsonResponse
     {
         $employee = Employee::find($id);
 
