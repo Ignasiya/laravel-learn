@@ -19,6 +19,7 @@ use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestRedirectController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -126,6 +127,11 @@ Route::prefix('/employee')->controller(EmployeeHomeworkController::class)->group
 Route::prefix('/form')->controller(FormTestController::class)->group(function () {
     Route::get('/', 'displayForm')->name('form.show');
     Route::post('/', 'postForm')->name('form.post');
+});
+
+Route::prefix('/worker')->controller(WorkerController::class)->group(function () {
+    Route::get('/{id?}', 'index')->name('worker.show');
+    Route::post('/', 'store')->name('worker.create');
 });
 
 
