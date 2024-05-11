@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeHomeworkController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\FormProcessor;
+use App\Http\Controllers\FormTestController;
 use App\Http\Controllers\HeaderTestController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\JsonParseController;
@@ -69,7 +70,7 @@ Route::prefix('/test_database')->controller(EmployeeController::class)->group(fu
 Route::resource('/post', PostController::class);
 
 Route::get('/main', function () {
-   return view('mainpage');
+    return view('mainpage');
 });
 
 Route::get('/about', function () {
@@ -121,10 +122,16 @@ Route::prefix('/employee')->controller(EmployeeHomeworkController::class)->group
     Route::put('/{id}', 'update')->name('employee.update');
 });
 
+// Урок 6 Формы
+Route::prefix('/form')->controller(FormTestController::class)->group(function () {
+    Route::get('/', 'displayForm')->name('form.show');
+    Route::post('/', 'postForm')->name('form.post');
+});
+
 
 // Группировка по префиксу и контроллеру
-Route::prefix('/post')->controller(PostController::class)->group(function() {
-   Route::get('/{post}', 'store')->name('post.create');
+Route::prefix('/post')->controller(PostController::class)->group(function () {
+    Route::get('/{post}', 'store')->name('post.create');
 });
 
 // Параметры машрута
