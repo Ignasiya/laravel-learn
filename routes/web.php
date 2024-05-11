@@ -18,6 +18,7 @@ use App\Http\Controllers\SendFileController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestRedirectController;
+use App\Http\Controllers\TestSecurityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
@@ -132,6 +133,11 @@ Route::prefix('/form')->controller(FormTestController::class)->group(function ()
 Route::prefix('/worker')->controller(WorkerController::class)->group(function () {
     Route::get('/{id?}', 'index')->name('worker.show');
     Route::post('/', 'store')->name('worker.create');
+});
+
+Route::prefix('/security')->controller(TestSecurityController::class)->group(function () {
+    Route::get('/', 'index')->name('security.show');
+    Route::post('/', 'post')->name('security.post');
 });
 
 
