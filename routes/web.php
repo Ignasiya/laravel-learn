@@ -19,6 +19,7 @@ use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestRedirectController;
 use App\Http\Controllers\TestSecurityController;
+use App\Http\Controllers\TestValidationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
@@ -138,6 +139,11 @@ Route::prefix('/worker')->controller(WorkerController::class)->group(function ()
 Route::prefix('/security')->controller(TestSecurityController::class)->group(function () {
     Route::get('/', 'index')->name('security.show');
     Route::post('/', 'post')->name('security.post');
+});
+
+Route::prefix('/validation')->controller(TestValidationController::class)->group(function () {
+    Route::get('/', 'index')->name('validation.show');
+    Route::post('/', 'post')->name('validation.post');
 });
 
 
