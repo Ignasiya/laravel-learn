@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CookieTestController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeHomeworkController;
@@ -150,6 +151,12 @@ Route::prefix('/validation')->controller(TestValidationController::class)->group
 Route::prefix('/builder')->controller(FormBuilderTestController::class)->group(function () {
     Route::get('/', 'show')->name('build.show');
     Route::post('/', 'post')->name('build.post');
+});
+
+// Формы домашняя работа №6
+Route::prefix('/form_book')->controller(BookController::class)->group(function () {
+    Route::get('/{id?}', 'index')->name('form_book.show');
+    Route::post('/', 'store')->name('form_book.create');
 });
 
 
