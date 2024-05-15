@@ -23,8 +23,6 @@ use App\Http\Controllers\TestSecurityController;
 use App\Http\Controllers\TestValidationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -154,7 +152,13 @@ Route::prefix('/builder')->controller(FormBuilderTestController::class)->group(f
     Route::post('/', 'post')->name('build.post');
 });
 
-// Урок 6 Response ответы
+// Формы домашняя работа №6
+Route::prefix('/form_book')->controller(BookController::class)->group(function () {
+    Route::get('/{id?}', 'index')->name('form_book.show');
+    Route::post('/', 'store')->name('form_book.create');
+});
+
+// Урок 7 Response ответы
 Route::get('/test_url', function () {
 //   return response('Helper response', 301)
 //       ->header('X-HEADER-1', 'test')
