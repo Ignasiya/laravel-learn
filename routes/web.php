@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\CookieTestController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeHomeworkController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\TestSecurityController;
 use App\Http\Controllers\TestValidationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -233,6 +235,19 @@ Route::prefix('/list_of_books')->group(function () {
     });
 });
 
+Route::get('/file_download', function () {
+    return response()->download(base_path() . '/test.txt', 'my_test');
+});
+
+Route::get('/file_show', function () {
+    return response()->file(base_path() . '/test.txt');
+});
+
+Route::get('/file_stream', function () {
+    return response()->streamDownload(function () {
+        echo file_get_contents('https://google.com');
+    }, 'google.html');
+});
 
 
 // Группировка по префиксу и контроллеру
