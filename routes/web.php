@@ -23,6 +23,8 @@ use App\Http\Controllers\TestSecurityController;
 use App\Http\Controllers\TestValidationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -151,6 +153,82 @@ Route::prefix('/builder')->controller(FormBuilderTestController::class)->group(f
     Route::get('/', 'show')->name('build.show');
     Route::post('/', 'post')->name('build.post');
 });
+
+// Урок 6 Response ответы
+Route::get('/test_url', function () {
+//   return response('Helper response', 301)
+//       ->header('X-HEADER-1', 'test')
+//       ->header('Content-Type', 'application/json');
+
+    return redirect(null, 301)->away('https://google.com');
+});
+
+Route::get('/test_cookie', function () {
+    return response('My first cookie')
+        ->cookie('my_test_cookie', 'test content', 5)
+        ->withHeaders([
+            'X-HEADER-TEST1' => 'IT WORKS!',
+            'X-HEADER-TEST2' => 'IT WORKS!',
+            'X-HEADER-TEST3' => 'IT WORKS!',])
+        ->header('Set-Cookie', 'my_test_cookie2=10')
+        ->withoutCookie('test_cookie2');
+});
+
+Route::get('/counter', function () {
+    $counterValue = session('counter', 0);
+    $counterValue++;
+    session(['counter' => $counterValue,]);
+    return 'ok';
+});
+
+Route::get('/result_counter', function () {
+    if (session()->has('counter')) {
+        session()->forget('counter');
+    }
+    return session('counter', 0);
+});
+
+Route::prefix('/list_of_books')->group(function () {
+    Route::get('/', function () {
+        $listOfBooks = session()->get('list_of_books', '');
+
+        return response()->json([
+            'status' => 'received',
+            'list_of_books' => $listOfBooks ? unserialize($listOfBooks) : 'The list is empty'
+        ]);
+    });
+    Route::post('/', function (Request $request) {
+        $listOfBooks = session()->get('list_of_books', '');
+
+        $listOfBooks = $listOfBooks ? unserialize($listOfBooks) : [];
+
+        $listOfBooks[] = ['author' => $request->get('author'), 'title' => $request->get('title')];
+
+        session()->put('list_of_books', serialize($listOfBooks));
+
+        return response()->json([
+            'status' => 'saved',
+            'list_of_books' => $listOfBooks
+        ]);
+    });
+    Route::delete('/{id}', function (int $id) {
+        $listOfBooks = session()->get('list_of_books', '');
+
+        $listOfBooks = $listOfBooks ? unserialize($listOfBooks) : [];
+
+        if (array_key_exists($id, $listOfBooks)) {
+            unset($listOfBooks[$id]);
+        }
+
+        session()->put('list_of_books', serialize($listOfBooks));
+
+        return response()->json([
+            'status' => 'deleted',
+            'list_of_books' => $listOfBooks
+        ]);
+    });
+});
+
 
 
 // Группировка по префиксу и контроллеру

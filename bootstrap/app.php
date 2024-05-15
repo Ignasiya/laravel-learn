@@ -14,6 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             '/test_request',
             '/json_parse',
+            '/list_of_books',
+            '/list_of_books/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
