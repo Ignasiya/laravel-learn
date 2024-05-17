@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CookieTestController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeHomeworkController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\JsonParseController;
 use App\Http\Controllers\LibraryUserController;
 use App\Http\Controllers\MyUserController;
+use App\Http\Controllers\PdfGeneratorController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RequestTestController;
 use App\Http\Controllers\SendFileController;
@@ -248,6 +250,16 @@ Route::get('/file_stream', function () {
         echo file_get_contents('https://google.com');
     }, 'google.html');
 });
+
+// Response домашняя работа №7
+Route::prefix('/homework_client')->controller(ClientController::class)->group(function () {
+    Route::get('/', 'index')->name('client.form');
+    Route::get('/all', 'showAll')->name('client.show.all');
+    Route::get('/{id}', 'showClient')->name('client.show');
+    Route::post('/', 'store')->name('client.create');
+});
+
+Route::get('/resume_{id}/pdf', [PdfGeneratorController::class, 'index'])->name('client.pdf');
 
 
 // Группировка по префиксу и контроллеру

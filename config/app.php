@@ -88,7 +88,8 @@ return [
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     'aliases' => Facade::defaultAliases()->merge([
-        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'PDF' =>  Barryvdh\DomPDF\Facade\Pdf::class
     ])->toArray(),
 
     /*
@@ -151,6 +152,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\BladeHelperServiceProvider::class,
-        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class
     ])->toArray(),
 ];
