@@ -10,7 +10,8 @@
         "kris/laravel-form-builder": "^1.53",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "rcrowe/twigbridge": "^0.14.3"
+        "rcrowe/twigbridge": "^0.14.3",
+        "twilio/sdk": "^8.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

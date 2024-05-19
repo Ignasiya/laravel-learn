@@ -21,6 +21,7 @@ use App\Http\Controllers\RequestTestController;
 use App\Http\Controllers\SendFileController;
 use App\Http\Controllers\SimpleController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TestDiController;
 use App\Http\Controllers\TestRedirectController;
 use App\Http\Controllers\TestSecurityController;
 use App\Http\Controllers\TestValidationController;
@@ -260,6 +261,8 @@ Route::prefix('/homework_client')->controller(ClientController::class)->group(fu
 });
 
 Route::get('/resume_{id}/pdf', [PdfGeneratorController::class, 'index'])->name('client.pdf');
+
+Route::get('/check_di', [TestDiController::class, 'showUrl'])->name('check_di.get');
 
 
 // Группировка по префиксу и контроллеру

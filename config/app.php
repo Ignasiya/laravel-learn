@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\CustomLogsProvider;
+use App\Services\CustomLogServiceInterface;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -153,6 +155,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\BladeHelperServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class
+        Barryvdh\DomPDF\ServiceProvider::class,
+        CustomLogsProvider::class
     ])->toArray(),
 ];
