@@ -264,6 +264,12 @@ Route::get('/resume_{id}/pdf', [PdfGeneratorController::class, 'index'])->name('
 
 Route::get('/check_di', [TestDiController::class, 'showUrl'])->name('check_di.get');
 
+// Service домашняя работа №7
+Route::get('/logs', function () {
+   return view('logs');
+});
+
+
 
 // Группировка по префиксу и контроллеру
 Route::prefix('/post')->controller(PostController::class)->group(function () {
