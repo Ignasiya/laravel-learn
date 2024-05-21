@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NewsCreated;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CookieTestController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\TestSecurityController;
 use App\Http\Controllers\TestValidationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -263,6 +265,16 @@ Route::prefix('/homework_client')->controller(ClientController::class)->group(fu
 Route::get('/resume_{id}/pdf', [PdfGeneratorController::class, 'index'])->name('client.pdf');
 
 Route::get('/check_di', [TestDiController::class, 'showUrl'])->name('check_di.get');
+
+// Урок 9 Events
+Route::get('/event', function () {
+    return NewsCreated::dispatch(News::find(1));
+});
+
+Route::get('/news-update', function () {
+    News::find(1)->update(['test' => 'TestTest']);
+    return 'updated';
+});
 
 
 // Группировка по префиксу и контроллеру

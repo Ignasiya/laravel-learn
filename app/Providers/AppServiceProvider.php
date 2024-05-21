@@ -2,9 +2,15 @@
 
 namespace App\Providers;
 
+use App\Events\NewsCreated;
+use App\Listeners\SendNewsCreatedNotification;
+use App\Listeners\SendNewsToRemoteServer;
+use App\Models\News;
+use App\Observers\NewsObserver;
 use App\Services\SmsSenderInterface;
 use App\Services\SmsSenderService;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +29,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(
+            NewsCreated::class,
+            SendNewsCreatedNotification::class,
+        );
+        Event::listen(
+            NewsCreated::class,
+            SendNewsToRemoteServer::class,
+        );
+        News::observer(NewsObserver::class);
     }
 }
