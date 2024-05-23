@@ -266,6 +266,11 @@ Route::get('/resume_{id}/pdf', [PdfGeneratorController::class, 'index'])->name('
 
 Route::get('/check_di', [TestDiController::class, 'showUrl'])->name('check_di.get');
 
+// Service домашняя работа №8
+Route::get('/logs', function () {
+    return view('logs');
+});
+
 // Урок 9 Events
 Route::get('/event', function () {
     return NewsCreated::dispatch(News::find(1));
@@ -275,7 +280,6 @@ Route::get('/news-update', function () {
     News::find(1)->update(['test' => 'TestTest']);
     return 'updated';
 });
-
 
 // Группировка по префиксу и контроллеру
 Route::prefix('/post')->controller(PostController::class)->group(function () {

@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->string('message');
-            $table->timestamp('event_date');
+            $table->dateTime('time');
+            $table->integer('duration');
+            $table->string('ip', 100)->nullable();
+            $table->string('url')->nullable();
+            $table->string('method', 10)->nullable();
+            $table->string('input')->nullable();
         });
     }
 
