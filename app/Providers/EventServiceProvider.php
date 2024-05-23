@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\NewsCreated;
 use App\Events\NewsHidden;
 use App\Listeners\NewsHiddenListener;
-use App\Listeners\SendNewsCreatedNotification;
 use App\Models\News;
 use App\Observers\NewsObserver;
 use Illuminate\Support\Facades\Event;
@@ -30,7 +28,6 @@ class EventServiceProvider extends ServiceProvider
             NewsHidden::class,
             NewsHiddenListener::class,
         );
-
-        News::observer(NewsObserver::class);
+        News::observe(NewsObserver::class);
     }
 }

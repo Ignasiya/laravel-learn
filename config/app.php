@@ -154,6 +154,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\BladeHelperServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         CustomLogsProvider::class
