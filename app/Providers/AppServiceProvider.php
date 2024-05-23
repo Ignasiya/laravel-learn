@@ -5,8 +5,6 @@ namespace App\Providers;
 use App\Events\NewsCreated;
 use App\Listeners\SendNewsCreatedNotification;
 use App\Listeners\SendNewsToRemoteServer;
-use App\Models\News;
-use App\Observers\NewsObserver;
 use App\Services\SmsSenderInterface;
 use App\Services\SmsSenderService;
 use Illuminate\Support\ServiceProvider;
@@ -37,6 +35,5 @@ class AppServiceProvider extends ServiceProvider
             NewsCreated::class,
             SendNewsToRemoteServer::class,
         );
-        News::observer(NewsObserver::class);
     }
 }
