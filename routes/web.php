@@ -28,8 +28,12 @@ use App\Http\Controllers\TestSecurityController;
 use App\Http\Controllers\TestValidationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
+use App\Jobs\SyncNews;
 use App\Models\News;
+use App\Models\User;
+use App\Notifications\UserEmailChangedNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -280,6 +284,45 @@ Route::get('/news-update', function () {
     News::find(1)->update(['test' => 'TestTest']);
     return 'updated';
 });
+
+// Урок 10 Очереди
+Route::get('/sync-news', function () {
+    SyncNews::dispatch(10);
+    return response(['status' => 'success']);
+});
+
+Route::get('locale', function () {
+    echo App::getLocale();
+});
+
+Route::get('locale/set/{locale}', function ($locale) {
+    App::setLocale($locale);
+    echo App::getLocale();
+    echo '<hr>';
+    echo __('messages.greet');
+});
+
+Route::get('locale/{locale}/thanks', function ($locale, Request $request) {
+    App::setLocale($locale);
+    echo __('messages.thanks', ['name' => $request->input('name')]);
+});
+
+Route::get('user/create-test/{amount}', function ($amount) {
+    return User::factory($amount)->create();
+});
+
+Route::get('user/{user}/change-email', function (User $user, Request $request) {
+    $oldEmail = $user->email;
+    $user->email = $request->input('email');
+    $user->save();
+    $user->notify(new UserEmailChangedNotification($oldEmail));
+    return response(['result' => 'email changed']);
+});
+
+Route::get('user/{user}/notifications', function (User $user) {
+    return $user->notifications();
+});
+
 
 // Группировка по префиксу и контроллеру
 Route::prefix('/post')->controller(PostController::class)->group(function () {

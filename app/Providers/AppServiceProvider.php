@@ -37,6 +37,6 @@ class AppServiceProvider extends ServiceProvider
             NewsCreated::class,
             SendNewsToRemoteServer::class,
         );
-        News::observer(NewsObserver::class);
+        News::observe(NewsObserver::class);
     }
 }
