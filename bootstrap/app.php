@@ -11,6 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            \App\Http\Middleware\HandleInertiaRequests::class,
+            \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+        ]);
+        $middleware->alias([
+            'log-request' => \App\Http\Middleware\LogRequestMiddleware::class,
+        ]);
         $middleware->validateCsrfTokens(except: [
             '/test_request',
             '/json_parse',

@@ -7,10 +7,14 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^2.2",
+        "inertiajs/inertia-laravel": "^1.0",
         "kris/laravel-form-builder": "^1.53",
+        "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "rcrowe/twigbridge": "^0.14.3",
+        "tightenco/ziggy": "^2.0",
         "twilio/sdk": "^8.0"
     },
     "require-dev": {
