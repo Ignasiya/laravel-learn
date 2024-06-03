@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\UsersController;
+use App\Mail\BookingCompleted;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Events\NewsCreated;
@@ -39,6 +42,7 @@ use App\Models\User;
 use App\Notifications\UserEmailChangedNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 Route::get('/test', TestController::class)->name('test');
 
@@ -403,3 +407,26 @@ Route::middleware('log-request')->group(function () {
 
 Route::get('users', [UsersController::class, 'index']);
 Route::get('users/{user}', [UsersController::class, 'show']);
+
+// Урок 12
+Route::get('book', function () {
+    $email = 'test@example.com';
+    Mail::to($email)->send(new BookingCompleted());
+    return response()->json(['status' => 'success']);
+});
+
+Route::get('telegram', function () {
+    Telegram::sendMessage([
+        'chat_id' => env('TELEGRAM_CHANNEL_ID'),
+        'parse_mode' => 'html',
+        'text' => 'Произошло тестовое событие'
+    ]);
+    return response()->json(['status' => 'success']);
+});
+
+Route::get('sentry', function () {
+    throw new Exception('Exception for sentry');
+});
+
+// Домашка 12
+Route::get('/notification_user/{id}', [RegisteredUserController::class, 'store']);
