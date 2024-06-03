@@ -13,6 +13,7 @@
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.14",
         "laravel/tinker": "^2.9",
         "rcrowe/twigbridge": "^0.14.3",
         "sentry/sentry-laravel": "^4.5",
