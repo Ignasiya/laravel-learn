@@ -42,6 +42,14 @@ services:
     networks:
       - app
 
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - '${PORT_MAIL:-1025}:1025'
+      - '${PORT_MAIL_UI:-8025}:8025'
+    networks:
+      - app
+
 networks:
   app:
     driver: bridge
