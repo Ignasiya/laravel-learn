@@ -15,6 +15,7 @@ class UsersController extends Controller
     {
         Gate::authorize('view-any', User::class);
         //Gate::authorize('view-users');
+
         return User::all();
     }
 

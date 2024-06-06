@@ -25,6 +25,9 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN apt-get update && apt-get install zip unzip
 RUN docker-php-ext-install pdo_mysql
 
+# XDebug
+RUN pecl install -o -f xdebug && docker-php-ext-enable xdebug
+
 # npm install
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs

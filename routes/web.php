@@ -407,7 +407,7 @@ Route::middleware('log-request')->group(function () {
 Route::get('users', [UsersController::class, 'index']);
 Route::get('users/{user}', [UsersController::class, 'show']);
 
-// Урок 11
+// Урок 12
 Route::get('book', function () {
     $email = 'test@example.com';
     Mail::to($email)->send(new BookingCompleted());
