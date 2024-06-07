@@ -346,6 +346,7 @@ Route::get('user/{user}/notifications', function (User $user) {
     return $user->notifications();
 });
 
+
 // Группировка по префиксу и контроллеру
 Route::prefix('/post')->controller(PostController::class)->group(function () {
     Route::get('/{post}', 'store')->name('post.create');
